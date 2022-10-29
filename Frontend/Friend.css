@@ -1,0 +1,140 @@
+::-webkit-scrollbar {
+    width: 20px;
+    
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* padding: 20px; */
+    border-radius: 50px;
+    margin: 70px;
+    
+  }
+  
+  /* Handle */
+  /* ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 20px;
+    
+  } */
+  ::-webkit-scrollbar-thumb {
+    border: 7px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+    border-radius: 50px;
+    background-color: #AAAAAA;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  
+  .logo{
+    width: 50px;
+    height: 50px;
+    margin:15px;
+  }
+  
+  .searchBarBorder{
+  
+    border-radius: 30px;
+    border: 0;
+    margin:15px;
+    text-align: center;
+    width:300px;
+    height: 40px;
+    background-color: D9D9D9;
+  }
+  
+  .searchBar
+  {
+    margin-top: 5px;
+    border: 0;
+    outline: 0;
+    background-color: D9D9D9;
+    text-align: center;
+  }
+  
+  .searchIcon{
+    text-align: right;
+  }
+  
+  .topnav {
+    overflow: hidden;
+    margin-left: 400px;
+    margin-top:10px;
+  }
+  
+  .topnav a {
+    float: left;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  .topnav a:hover {
+    color: black;
+  }
+  
+  .topnav a.active {
+    color: 2BB673;
+  }
+  .groupsContainer{
+      overflow-y: scroll;
+      margin: 20px;
+      padding:55px;
+      background-color: 2BB673;
+      border-radius: 55px;
+
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 700;
+      height: 300px;
+      overflow-y: scroll;
+      gap: 10px;
+  }
+  .group-border{
+      display: flex;
+      justify-content: space-between;
+      background-color: 282828;
+      color: FFFFFF;
+  
+      
+      border-radius: 30px;
+      width:250px;
+      height: 40px;
+      padding-top: 8;
+      padding-left: 15;
+      padding-right: 15;
+  
+      margin-bottom:10px;
+  }
+  
+  
+  .plus-icon{
+      height:70px;
+      width:70px;
+      font-size: 70px;
+      border:0;
+      outline:0;
+      margin-bottom:10px;
+      text-align: center;
+      padding-left: 30px;
+  }
+  
+  .acc-div{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  #acc-img{
+    width: 60px;
+    height: 60px;
+    border: solid;
+    border-color: 2BB673;
+    border-width: 3px;
+    border-radius: 50px;
+  }
