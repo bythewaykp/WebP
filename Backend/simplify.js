@@ -1,10 +1,8 @@
-
-
+let G = {};
 function intToChar(int) {
     const code = "a".charCodeAt(0);
     return String.fromCharCode(code + int);
 }
-
 
 function getMin(arr) {
     var minInd = 0;
@@ -23,24 +21,34 @@ function minOf2(x, y) {
 }
 
 function minCashFlowRec(amount) {
-    var mxCredit = getMax(amount),
+    let mxCredit = getMax(amount),
         mxDebit = getMin(amount);
 
-    if (amount[mxCredit] == 0 && amount[mxDebit] == 0) return;
-
+    if (amount[mxCredit] == 0 && amount[mxDebit] == 0) {
+        // let T = G;
+        // console.log(G);
+        return
+        // return T
+    }
     var min = minOf2(-amount[mxDebit], amount[mxCredit]);
     amount[mxCredit] -= min;
     amount[mxDebit] += min;
 
-    console.log(`${intToChar(mxDebit)} owes ${intToChar(mxCredit)} an amount of ${min}`);
+    let a = intToChar(mxDebit);
+    let b = intToChar(mxCredit);
+
+    G[a] ?? (G[a] = {});
+    G[a][b] = min;
+
+    // console.log(`${intToChar(mxDebit)} owes ${intToChar(mxCredit)} an amount of ${min}`);
 
     minCashFlowRec(amount);
 }
 
 function simplify(L) {
-    let N =Object.keys(L).length
+    let N = Object.keys(L).length;
 
-    let amount = new Array(N).fill(0)
+    let amount = new Array(N).fill(0);
 
     for (i = 0; i < N; i++) {
         let k = intToChar(i);
@@ -50,9 +58,11 @@ function simplify(L) {
         }
     }
 
-    minCashFlowRec(amount);
+    // let O = minCashFlowRec(amount,{});
+    // console.log(G);
+    // minCashFlowRec(amount, G);
+    minCashFlowRec(amount)
+    return G
 }
 
-
-
-module.exports = simplify
+module.exports = simplify;

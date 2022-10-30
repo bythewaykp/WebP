@@ -4,8 +4,8 @@ let visualize = () => {
     const pythonProcess = spawn("python", ["./a.py"]);
 };
 
-const simplify = require("./simplify");
-let db = require("./db");
+const simplify = require("./Backend/simplify");
+let db = require("./db2");
 const fs = require("fs");
 
 let printNwrite = (file) => {
@@ -37,7 +37,21 @@ let addExp = (a, b, v, grp) => {
     }
 };
 
-addExp("b", "a", 35, "wayanad");
-printNwrite("a");
+// addExp("b", "a", 35, "wayanad");
+// printNwrite("a");
+console.log(
+    simplify(db.grps.wayanad)
+
+);
 // simplify(db.grps.wayanad)
-visualize()
+// visualize()
+let getGrpList = () => {
+    return Object.keys(db.grps);
+};
+
+let getGrpMembs = () => {
+
+
+    // return Object.keys(db.grps[grp]);
+};
+
