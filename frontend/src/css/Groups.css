@@ -1,0 +1,135 @@
+::-webkit-scrollbar {
+    width: 20px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* padding: 20px; */
+    border-radius: 50px;
+    margin: 90px;
+}
+
+/* Handle */
+/* ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 20px;
+    
+  } */
+::-webkit-scrollbar-thumb {
+    border: 7px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+    border-radius: 50px;
+    background-color: #aaaaaa;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+
+
+.searchBarBorder {
+    border-radius: 30px;
+    border: 0;
+    margin: 15px;
+    text-align: center;
+    width: 300px;
+    height: 40px;
+    background-color: #D9D9D9;
+}
+
+.grpName {
+    font-size: 18px;
+}
+.grpOwe {
+    font-size: 10px;
+    padding-top: 5px;
+}
+
+.searchBar {
+    margin-top: 5px;
+    border: 0;
+    outline: 0;
+    background-color: #D9D9D9;
+    text-align: center;
+}
+
+.searchIcon {
+    text-align: right;
+}
+
+.topnav {
+    overflow: hidden;
+    margin-left: 400px;
+    margin-top: 10px;
+}
+
+.topnav a {
+    float: left;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.topnav a:hover {
+    color: black;
+}
+
+.topnav a.active {
+    color: #2BB673;
+}
+.groupsContainer {
+    margin: 20px;
+    padding: 40px;
+    background-color: #2BB673;
+    border-radius: 55px;
+    width: 700px;
+    height: 400px;
+}
+
+.Gcontainer {
+    overflow-y: scroll;
+    height: 300px;
+    gap: 30px;
+    padding: 10px;
+}
+
+.group-border {
+    display: flex;
+    justify-content: space-between;
+    background-color: #282828;
+    color: #FFFFFF;
+
+    border-radius: 31px;
+    width: 483px;
+    padding: 10px 45px;
+}
+
+.plus-icon {
+    height: 70px;
+    width: 70px;
+    font-size: 70px;
+    border: 0;
+    outline: 0;
+    margin-bottom: 10px;
+    text-align: center;
+    padding-left: 30px;
+}
+
+.acc-div {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+#acc-img {
+    width: 60px;
+    height: 60px;
+    border: solid;
+    border-color: #2BB673;
+    border-width: 3px;
+    border-radius: 50px;
+}
