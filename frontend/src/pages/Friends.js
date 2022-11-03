@@ -7,7 +7,7 @@ import axios from "axios";
 
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
-export default function Home() {
+export default function Friends() {
     let [grp, setGrp] = useState({});
     let [loader, setLoader] = useState(false);
     let [search, setSearch] = useState("");
@@ -15,7 +15,9 @@ export default function Home() {
     useEffect(() => {
         setLoader(true);
         axios
-            .get("http://localhost:3002/grplist", { params: { name: "kp" } })
+            .get("http://localhost:3002/friendlist", {
+                params: { name: "kp" },
+            })
             .then(async (r) => {
                 setGrp(r.data);
                 await delay(400);
@@ -29,7 +31,6 @@ export default function Home() {
         <div>
             <NavBar />
             <Logo />
-
             <div class="d-flex flex-column align-items-center">
                 <form class="searchBarBorder">
                     <input
@@ -43,22 +44,27 @@ export default function Home() {
                     />
                     <i class="searchIcon fa-solid fa-magnifying-glass"></i>
                 </form>
-
-                <div class="groupsContainer">
+                <div className="groupsContainer">
                     {!loader ? (
-                        <div class=" fc Gcontainer">
-                            {Object.keys(grp).filter(i=>i.toLowerCase().includes(search.toLowerCase())).map((i) => {
-                                return (
-                                    <div class="group-border">
-                                        <div className="f grpName">{i}</div>
-                                        <div className="f grpOwe">
-                                            {grp[i] >= 0
-                                                ? `You owe ${grp[i]}`
-                                                : `You are owed ${-grp[i]}`}
+                        <div class="fc Gcontainer">
+                            {Object.keys(grp)
+                                .filter((i) =>
+                                    i
+                                        .toLowerCase()
+                                        .includes(search.toLowerCase())
+                                )
+                                .map((i) => {
+                                    return (
+                                        <div class="group-border">
+                                            <div className="f grpName">{i}</div>
+                                            <div className="f grpOwe">
+                                                {grp[i] >= 0
+                                                    ? `You owe ${grp[i]}`
+                                                    : `You are owed ${-grp[i]}`}
+                                            </div>
                                         </div>
-                                    </div>
-                                );
-                            })}
+                                    );
+                                })}
                         </div>
                     ) : (
                         <div className="loaderbox fc">
@@ -69,9 +75,10 @@ export default function Home() {
 
                 <div class="align-items-center">
                     <i class="plus-icon fa-solid fa-circle-plus"></i>
-                    <p>Create a new group</p>
+                    <p>Add new contact</p>
                 </div>
             </div>
+
             <div class="acc-div">
                 <img
                     id="acc-img"

@@ -4,61 +4,67 @@
             "id": 1,
             "name": "wayanad",
             "body": {
-                "a": {
-                    "c": 15,
-                    "e": 30,
-                    "b": 20
+                "kp": {
+                    "alex": 15,
+                    "yuvetha": 30,
+                    "nichu": 20
                 },
-                "b": {
-                    "c": 10,
-                    "e": 55
+                "nichu": {
+                    "alex": 10,
+                    "yuvetha": 55
                 },
-                "c": {
-                    "d": 35
+                "alex": {
+                    "keerthi": 35
                 },
-                "d": {
-                    "e": 20
+                "keerthi": {
+                    "yuvetha": 20
                 },
-                "e": {}
+                "yuvetha": {}
             }
         },
         {
             "id": 2,
             "name": "mysore",
             "body": {
-                "a": {
-                    "b": 25
+                "kp": {
+                    "nichu": 25
                 },
-                "b": {}
+                "nichu": {}
             }
         },
         {
             "id": 3,
             "name": "mysore2",
             "body": {
-                "a": {
-                    "b": 25
+                "kp": {
+                    "nichu": 45
                 },
-                "b": {}
+                "nichu": {}
             }
-        },{
+        },
+        {
             "id": 4,
             "name": "idukki",
             "body": {
-                "a": {
-                    "b": 25
+                "kp": {
+                    "nayana": 158
                 },
-                "b": {}
+                "nayana": { "anagha": 20 },
+                "anagha":{},
+                "anu":{}
             }
         },
         {
             "id": 5,
             "name": "kozhikode",
             "body": {
-                "a": {
-                    "b": 25
+                "kp": {
+                    "nichu": 31
                 },
-                "b": {}
+                "nichu": {
+                    "alex": 20
+                },
+                "alex": {}
             }
         }
     ]

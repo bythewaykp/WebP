@@ -1,18 +1,20 @@
 let G = {};
-function intToChar(int) {
-    const code = "a".charCodeAt(0);
-    return String.fromCharCode(code + int);
-}
 
 function getMin(arr) {
-    var minInd = 0;
-    for (i = 1; i < arr.length; i++) if (arr[i] < arr[minInd]) minInd = i;
+    var minInd = Object.keys(arr)[0];
+    for(let i in arr){
+        if(arr[i]<arr[minInd])
+            minInd = i
+    }
     return minInd;
 }
 
 function getMax(arr) {
-    var maxInd = 0;
-    for (i = 1; i < arr.length; i++) if (arr[i] > arr[maxInd]) maxInd = i;
+    var maxInd = Object.keys(arr)[0];
+    for(let i in arr){
+        if(arr[i]>arr[maxInd])
+            maxInd = i
+    }
     return maxInd;
 }
 
@@ -20,49 +22,43 @@ function minOf2(x, y) {
     return x < y ? x : y;
 }
 
-function minCashFlowRec(amount) {
-    let mxCredit = getMax(amount),
-        mxDebit = getMin(amount);
+function minCashFlowRec(db) {
+    let mxCredit = getMax(db),
+        mxDebit = getMin(db);
 
-    if (amount[mxCredit] == 0 && amount[mxDebit] == 0) {
-        // let T = G;
-        // console.log(G);
-        return
-        // return T
+    if (db[mxCredit] == 0 && db[mxDebit] == 0) {
+
+        return G;
     }
-    var min = minOf2(-amount[mxDebit], amount[mxCredit]);
-    amount[mxCredit] -= min;
-    amount[mxDebit] += min;
+    var min = minOf2(-db[mxDebit], db[mxCredit]);
 
-    let a = intToChar(mxDebit);
-    let b = intToChar(mxCredit);
+    db[mxCredit] -= min;
+    db[mxDebit] += min;
 
-    G[a] ?? (G[a] = {});
-    G[a][b] = min;
 
-    // console.log(`${intToChar(mxDebit)} owes ${intToChar(mxCredit)} an amount of ${min}`);
+    G[mxDebit] ?? (G[mxDebit] = {});
+    G[mxDebit][mxCredit] = min;
+    G[mxCredit] ?? (G[mxCredit] = {});
+    G[mxCredit][mxDebit] = -min;
 
-    minCashFlowRec(amount);
+    minCashFlowRec(db);
 }
 
 function simplify(L) {
-    let N = Object.keys(L).length;
 
-    let amount = new Array(N).fill(0);
+    let db= {}
+    Object.keys(L).forEach((i)=>{
+        Object.keys(L).forEach(j=>{
+            let a = (L[j]?.[i] ?? 0) - (L[i]?.[j] ?? 0);
+            if(!db[i])
+                db[i]=a
+            else
+                db[i]+=a
+        })
+    })
 
-    for (i = 0; i < N; i++) {
-        let k = intToChar(i);
-        for (j = 0; j < N; j++) {
-            let l = intToChar(j);
-            amount[i] += Number(L[l]?.[k] ?? 0) - Number(L[k]?.[l] ?? 0);
-        }
-    }
-
-    // let O = minCashFlowRec(amount,{});
-    // console.log(G);
-    // minCashFlowRec(amount, G);
-    minCashFlowRec(amount)
-    return G
+    minCashFlowRec(db)
+    return G;
 }
 
 module.exports = simplify;
