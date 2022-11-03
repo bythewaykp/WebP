@@ -1,5 +1,6 @@
 import "../css/Groups.css";
 import NavBar from "../components/Navbar";
+import Logout from "../components/Logout";
 import Logo from "../components/Logo";
 import Loader from "../components/Loader";
 import { useEffect, useState } from "react";
@@ -79,13 +80,7 @@ export default function Friends() {
                 </div>
             </div>
 
-            <div class="acc-div">
-                <img
-                    id="acc-img"
-                    src="https://res.cloudinary.com/bhavana2002/image/upload/v1665045915/Mask_group_nzxdut.png"
-                />
-                <p>Logout</p>
-            </div>
+            <Logout/>
         </div>
     );
 }

@@ -29,11 +29,12 @@
 }
 
 
-
 .searchBarBorder {
-    border-radius: 30px;
-    border: 0;
-    margin: 15px;
+    border-radius: 40px;
+    /* border: 0; */
+    /* margin: 15px; */
+    margin-top: 20px;
+    margin-bottom: 10px;
     text-align: center;
     width: 300px;
     height: 40px;
@@ -60,28 +61,6 @@
     text-align: right;
 }
 
-.topnav {
-    overflow: hidden;
-    margin-left: 400px;
-    margin-top: 10px;
-}
-
-.topnav a {
-    float: left;
-    color: black;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-}
-
-.topnav a:hover {
-    color: black;
-}
-
-.topnav a.active {
-    color: #2BB673;
-}
 .groupsContainer {
     margin: 20px;
     padding: 40px;
@@ -92,7 +71,7 @@
 }
 
 .Gcontainer {
-    overflow-y: scroll;
+    overflow-y: auto;
     height: 300px;
     gap: 30px;
     padding: 10px;
@@ -132,4 +111,19 @@
     border-color: #2BB673;
     border-width: 3px;
     border-radius: 50px;
+}
+
+.option-icons{
+    width: 40px;
+    
+}
+.back{
+    /* width: 60px; */
+
+    position: absolute;
+    right: 40px;
+    top:50%;
+}
+.options{
+    gap: 20px;
 }

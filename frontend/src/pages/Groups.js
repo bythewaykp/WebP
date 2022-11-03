@@ -1,4 +1,6 @@
 import "../css/Groups.css";
+import { useNavigate } from "react-router-dom";
+import Logout from "../components/Logout";
 import NavBar from "../components/Navbar";
 import Logo from "../components/Logo";
 import Loader from "../components/Loader";
@@ -8,6 +10,7 @@ import axios from "axios";
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
 export default function Home() {
+    const navigate = useNavigate();
     let [grp, setGrp] = useState({});
     let [loader, setLoader] = useState(false);
     let [search, setSearch] = useState("");
@@ -18,26 +21,25 @@ export default function Home() {
             .get("http://localhost:3002/grplist", { params: { name: "kp" } })
             .then(async (r) => {
                 setGrp(r.data);
-                await delay(400);
+                await delay(300);
                 setLoader(false);
             });
     }, []);
 
-    console.log(grp);
 
     return (
         <div>
             <NavBar />
             <Logo />
 
-            <div class="d-flex flex-column align-items-center">
-                <form class="searchBarBorder">
+            <div class="fc">
+                <form class="searchBarBorder fc">
                     <input
                         onChange={(e) => {
                             setSearch(e.target.value);
                         }}
                         value={search}
-                        class="searchBar"
+                        class="searchBar "
                         type="text"
                         placeholder="Search for a group.."
                     />
@@ -47,18 +49,31 @@ export default function Home() {
                 <div class="groupsContainer">
                     {!loader ? (
                         <div class=" fc Gcontainer">
-                            {Object.keys(grp).filter(i=>i.toLowerCase().includes(search.toLowerCase())).map((i) => {
-                                return (
-                                    <div class="group-border">
-                                        <div className="f grpName">{i}</div>
-                                        <div className="f grpOwe">
-                                            {grp[i] >= 0
-                                                ? `You owe ${grp[i]}`
-                                                : `You are owed ${-grp[i]}`}
-                                        </div>
-                                    </div>
-                                );
-                            })}
+                            {Object.keys(grp)
+                                .filter((i) =>
+                                    i
+                                        .toLowerCase()
+                                        .includes(search.toLowerCase())
+                                )
+                                .map((i) => {
+                                    return (
+                                        <button
+                                            class="group-border"
+                                            onClick={(e) => {
+                                                navigate("/grpindividual", {
+                                                    state: { id: i },
+                                                });
+                                            }}
+                                        >
+                                            <div className="f grpName">{i}</div>
+                                            <div className="f grpOwe">
+                                                {grp[i] >= 0
+                                                    ? `You owe ${grp[i]}`
+                                                    : `You are owed ${-grp[i]}`}
+                                            </div>
+                                        </button>
+                                    );
+                                })}
                         </div>
                     ) : (
                         <div className="loaderbox fc">
@@ -72,13 +87,7 @@ export default function Home() {
                     <p>Create a new group</p>
                 </div>
             </div>
-            <div class="acc-div">
-                <img
-                    id="acc-img"
-                    src="https://res.cloudinary.com/bhavana2002/image/upload/v1665045915/Mask_group_nzxdut.png"
-                />
-                <p>Logout</p>
-            </div>
+            <Logout />
         </div>
     );
 }
