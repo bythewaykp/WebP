@@ -1,71 +1,80 @@
 {
-    "grps": [
-        {
-            "id": 1,
-            "name": "wayanad",
-            "body": {
-                "kp": {
-                    "alex": 15,
-                    "yuvetha": 30,
-                    "nichu": 20
-                },
-                "nichu": {
-                    "alex": 10,
-                    "yuvetha": 55
-                },
-                "alex": {
-                    "keerthi": 35
-                },
-                "keerthi": {
-                    "yuvetha": 20
-                },
-                "yuvetha": {}
-            }
+  "grps": [
+    {
+      "id": 1,
+      "name": "wayanad",
+      "body": {
+        "kp": {},
+        "nichu": {
+          "alex": 10,
+          "yuvetha": 55,
+          "kp": 72.25,
+          "bhavana": "116.25"
         },
-        {
-            "id": 2,
-            "name": "mysore",
-            "body": {
-                "kp": {
-                    "nichu": 25
-                },
-                "nichu": {}
-            }
+        "alex": {
+          "keerthi": 35,
+          "kp": 71.5,
+          "bhavana": "116.25"
         },
-        {
-            "id": 3,
-            "name": "mysore2",
-            "body": {
-                "kp": {
-                    "nichu": 45
-                },
-                "nichu": {}
-            }
+        "keerthi": {
+          "yuvetha": 20,
+          "kp": 92.25,
+          "bhavana": "116.25"
         },
-        {
-            "id": 4,
-            "name": "idukki",
-            "body": {
-                "kp": {
-                    "nayana": 158
-                },
-                "nayana": { "anagha": 20 },
-                "anagha":{},
-                "anu":{}
-            }
+        "yuvetha": {
+          "kp": 52.5
         },
-        {
-            "id": 5,
-            "name": "kozhikode",
-            "body": {
-                "kp": {
-                    "nichu": 31
-                },
-                "nichu": {
-                    "alex": 20
-                },
-                "alex": {}
-            }
+        "bhavana": {
+          "kp": 92.25
         }
-    ]
+      }
+    },
+    {
+      "id": 2,
+      "name": "mysore",
+      "body": {
+        "kp": {
+          "nichu": 25
+        },
+        "nichu": {}
+      }
+    },
+    {
+      "id": 3,
+      "name": "mysore2",
+      "body": {
+        "kp": {
+          "nichu": 45
+        },
+        "nichu": {}
+      }
+    },
+    {
+      "id": 4,
+      "name": "idukki",
+      "body": {
+        "kp": {
+          "nayana": 158
+        },
+        "nayana": {
+          "anagha": 20
+        },
+        "anagha": {},
+        "anu": {}
+      }
+    },
+    {
+      "id": 5,
+      "name": "kozhikode",
+      "body": {
+        "kp": {
+          "nichu": 31
+        },
+        "nichu": {
+          "alex": 20
+        },
+        "alex": {}
+      }
+    }
+  ]
 }

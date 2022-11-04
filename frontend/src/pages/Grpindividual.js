@@ -1,8 +1,8 @@
-import "../css/Groups.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import Loader from "../components/Loader";
+import Logo from "../components/Logo";
 
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
@@ -11,6 +11,7 @@ export default function Grpindividual() {
     const location = useLocation();
     let [loader, setLoader] = useState(false);
     let [obj, setObj] = useState({});
+    let [simp, setSimp] = useState(true);
 
     let totsum = (obj) => {
         return Object.values(obj).reduce((a, b) => a + b, 0);
@@ -20,21 +21,67 @@ export default function Grpindividual() {
         setLoader(true);
         axios
             .get("http://localhost:3002/grpindividual", {
-                params: { name: "kp", grp: location.state.id },
+                params: {
+                    name: location.state.owner,
+                    grp: location.state.grpname,
+                },
             })
             .then(async (r) => {
-                setObj(r.data);
-                console.log(r.data);
-                await delay(400);
+                setObj(r.data.db);
+                console.log(r.data.s);
+                await delay(300);
                 setLoader(false);
             });
     }, []);
+
     return (
         <>
+            <Logo />
             <div class="d-flex flex-column align-items-center">
                 <div class="searchBarBorder">
-                    <p>{location.state.id}</p>
+                    <p>{location.state.grpname}</p>
                 </div>
+                <button
+                    onClick={() => {
+                        setSimp(!simp);
+                        if (simp) {
+                            setLoader(true);
+                            axios
+                                .get(
+                                    "http://localhost:3002/grpindividualnosimp",
+                                    {
+                                        params: {
+                                            name: location.state.owner,
+                                            grp: location.state.grpname,
+                                        },
+                                    }
+                                )
+                                .then(async (r) => {
+                                    setObj(r.data.db);
+                                    console.log(r.data.s);
+                                    await delay(300);
+                                    setLoader(false);
+                                });
+                        } else {
+                            setLoader(true);
+                            axios
+                                .get("http://localhost:3002/grpindividual", {
+                                    params: {
+                                        name: location.state.owner,
+                                        grp: location.state.grpname,
+                                    },
+                                })
+                                .then(async (r) => {
+                                    setObj(r.data.db);
+                                    console.log(r.data.s);
+                                    await delay(300);
+                                    setLoader(false);
+                                });
+                        }
+                    }}
+                >
+                    simplify {simp ? "yes" : "no"}
+                </button>
 
                 {totsum(obj) >= 0 ? (
                     <div class="group-border">{`You owe ${totsum(obj)}`}</div>
@@ -78,7 +125,7 @@ export default function Grpindividual() {
             </div>
             <div class="fr options">
                 <div className="fc">
-                    <Link to="/addexpense">
+                    <Link to="/addexpense" state="hi">
                         <img
                             src="https://res.cloudinary.com/bhavana2002/image/upload/v1665062967/TICKICON_1_chfwrw.png"
                             class="option-icons"
@@ -88,7 +135,7 @@ export default function Grpindividual() {
                 </div>
                 <div className="fc">
                     <Link to="/editgroup">
-                        <img 
+                        <img
                             src="https://res.cloudinary.com/bhavana2002/image/upload/v1665062957/EDITICON_v5mwie.png"
                             class="option-icons"
                         />
@@ -97,7 +144,13 @@ export default function Grpindividual() {
                     <p>Edit the Group</p>
                 </div>
                 <div className="fc">
-                    <Link to="/addexpense">
+                    <Link
+                        to="/addexpense"
+                        state={{
+                            owner: location.state.owner,
+                            grpname: location.state.grpname,
+                        }}
+                    >
                         <img
                             src="https://res.cloudinary.com/bhavana2002/image/upload/v1665062967/ADDICON_z0jop2.png"
                             class="option-icons"

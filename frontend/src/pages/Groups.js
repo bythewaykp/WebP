@@ -1,4 +1,3 @@
-import "../css/Groups.css";
 import { useNavigate } from "react-router-dom";
 import Logout from "../components/Logout";
 import NavBar from "../components/Navbar";
@@ -21,7 +20,7 @@ export default function Home() {
             .get("http://localhost:3002/grplist", { params: { name: "kp" } })
             .then(async (r) => {
                 setGrp(r.data);
-                await delay(300);
+                // await delay(300);
                 setLoader(false);
             });
     }, []);
@@ -61,7 +60,7 @@ export default function Home() {
                                             class="group-border"
                                             onClick={(e) => {
                                                 navigate("/grpindividual", {
-                                                    state: { id: i },
+                                                    state: { grpname: i ,owner:"kp"},
                                                 });
                                             }}
                                         >

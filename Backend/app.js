@@ -3,7 +3,6 @@ let simplify = require("./simplify");
 
 // print('table1','*')
 let DB_PORT = 3001;
-
 let axios = require("axios");
 var express = require("express");
 var app = express();
@@ -16,7 +15,6 @@ let grpbody = async (grp) => {
     let d = await axios
         .get(`http://localhost:${DB_PORT}/grps?name=${grp}`)
         .then((r) => {
-            // console.log(r.data[0]);
             return r.data[0];
         })
         .catch((e) => {
@@ -29,34 +27,82 @@ app.post("/login", async (req, res) => {
     [name, username, email, password] = req.body.params;
 });
 
-app.get("/grpbody", async (req, res) => {
-    let { grp } = req.query;
-    let body = await grpbody(grp);
-    console.log(body);
-    res.json(body);
+// app.get("/grpbody", async (req, res) => {
+//     let { grp } = req.query;
+//     let body = await grpbody(grp);
+//     // console.log(body);
+//     res.json(body);
+// });
+
+app.get("/grpindividual", async (req, res) => {
+    let { name, grp } = req.query;
+    console.log(`triggered /grpindivdual ${grp}, ${name}`);
+    let b = await grpbody(grp);
+    // console.log(b);
+    let s = simplify(b["body"]);
+    let db = {};
+    // Object.keys(s).filter((i) => i != name).map(k=>{
+    //     db[k]=s[k][name]??0
+    // });
+    Object.keys(s)
+        .filter((i) => i != name)
+        .map((k) => {
+            db[k] = s[name][k] ?? 0;
+        });
+    res.json({ db, s });
+});
+
+app.get("/grpindividualnosimp", async (req, res) => {
+    let { name, grp } = req.query;
+
+    console.log(`triggered /grpindivdualnosimp ${grp}, ${name}`);
+    let b = await grpbody(grp);
+
+    // console.log(b);
+    let s = b["body"];
+
+    // let t = Object.assign({}, s)
+    let t ={...s}
+
+    Object.keys(s).map(i=>{
+        Object.keys(s[i]).map(j=>{
+
+            t[j][i]=-s[i][j]
+        })
+        
+    })
+    console.log(s);
+
+    // console.log(s);
+    let db = {};
+    // Object.keys(s).filter((i) => i != name).map(k=>{
+    //     db[k]=s[k][name]??0
+    // // });
+    Object.keys(s)
+        .filter((i) => i != name)
+        .map((k) => {
+            db[k] = s[name][k] ?? 0;
+        });
+
+    res.json({ db, t });
 });
 
 app.get("/grplist", async (req, res) => {
     let { name } = req.query;
+    console.log(`triggered /grplist ${name}`);
+
     await axios
         .get(`http://localhost:${DB_PORT}/grps`)
         .then((r) => {
             d = {};
-            r.data.map(i=>{
-                let grp = i["name"]
-                let body = i["body"]
-                let obj = simplify(body)[name];
+            r.data.map(async (i) => {
+                let grp = i["name"];
+                let body = i["body"];
+                let p = simplify(body);
+                let obj = p[name];
                 let s = Object.values(obj).reduce((a, b) => a + b, 0);
                 d[grp] = s;
-            })
-            // Object.entries(r.data).map((i) => {
-            //     let nam = i[1]["name"];
-            //     // console.log(simplify(i[1]["body"]));
-            //     let obj = simplify(i[1]["body"])[name];
-            //     let s = Object.values(obj).reduce((a, b) => a + b, 0);
-            //     d[nam] = s;
-            // });
-            console.log('triggered /grplist');
+            });
             res.json(d);
         })
         .catch((e) => {
@@ -69,15 +115,14 @@ let frndData = async (name, frnd) => {
         .get(`http://localhost:${DB_PORT}/grps`)
         .then((r) => {
             d = {};
-            r.data.map(i => {
+            r.data.map((i) => {
                 let grp = i["name"];
                 let body = i["body"];
 
-                d[grp]=simplify(body)[frnd]?.[name]??0
+                d[grp] = simplify(body)[frnd]?.[name] ?? 0;
             });
             // console.log(d);
             return d;
-
         })
         .catch((e) => {
             console.log("e - get grp list");
@@ -87,16 +132,18 @@ let frndData = async (name, frnd) => {
 
 app.get("/frienddata", async (req, res) => {
     let { name, frnd } = req.query;
+    console.log(`triggered /frienddata ${frnd}, ${name}`);
     let a = await frndData(name, frnd);
     console.log(a);
 });
 
 app.get("/friendlist", async (req, res) => {
     let { name } = req.query;
+    console.log(`triggered /friendlist ${name}`);
+
     await axios
         .get(`http://localhost:${DB_PORT}/grps`)
-        .then(async(r) => {
-            
+        .then(async (r) => {
             st = new Set();
 
             //add each friend of owner to the set st
@@ -104,37 +151,34 @@ app.get("/friendlist", async (req, res) => {
                 Object.keys(i["body"]).map((t) => {
                     st.add(t);
                 });
-                
             });
-            st.delete(name)
+            st.delete(name);
             //array of names of all friends of owner
             let frndnames = [...st];
-            t ={}
+            t = {};
 
             //iterate through each friend
-            for(let frnd of frndnames){
+            for (let frnd of frndnames) {
                 let obj = await frndData(name, frnd);
                 //calculate the sum of expenses in all grps a friend frnd owe u
-                let s = Object.values(obj).reduce((a, b) => a + b, 0)
-                t[frnd] = s
-
+                let s = Object.values(obj).reduce((a, b) => a + b, 0);
+                t[frnd] = s;
             }
-            console.log('triggered /friendlist')
-            res.send(t)
-
+            res.send(t);
         })
         .catch((e) => {
             console.log("e - get grp list");
-        })
+        });
 });
 
 app.get("/grpmembs", async (req, res) => {
     // {"grp":"wayanad"}
-    let { grp } = req.body;
+    let { grp } = req.query;
+    console.log(`triggered /grpmembs ${grp}`);
 
     let val = await grpbody(grp);
     res.send(Object.keys(val["body"]));
-    console.log(Object.keys(val["body"]));
+    // console.log(Object.keys(val["body"]));
 });
 app.get("/simplify", async (req, res) => {
     let { grp } = req.body;
@@ -144,27 +188,42 @@ app.get("/simplify", async (req, res) => {
     res.send(simplify(val["body"]));
     console.log(simplify(val["body"]));
 });
+
 app.post("/addexpense", async (req, res) => {
+    console.log("triggered /addexpense");
     // {"a":"b","b":"a","v":29,"grp":"wayanad"}
-    let { a, b, v, grp } = req.body;
+    let { a, membs, grp } = req.body;
+
+    let addExp = (a, b, v) => {
+        if (db2?.[b]?.[a]) {
+            if (db2[b][a] > v) {
+                db2[b][a] -= v;
+            } else if (db2[b][a] < v) {
+                db2[a][b] = v - db2[b][a];
+                delete db2[b][a];
+            } else {
+                delete db2[b][a];
+            }
+        } else if (db2?.[a]?.[b]) {
+            db2[a][b] += v;
+        } else if (db2?.[a]) {
+            db2[a][b] = v;
+        }
+        return db2;
+    };
 
     let val = await grpbody(grp);
     let db2 = val["body"];
 
-    if (db2?.[b]?.[a]) {
-        if (db2[b][a] > v) {
-            db2[b][a] -= v;
-        } else if (db2[b][a] < v) {
-            db2[a][b] = v - db2[b][a];
-            delete db2[b][a];
-        } else {
-            delete db2[b][a];
-        }
-    } else if (db2?.[a]?.[b]) {
-        db2[a][b] += v;
-    } else if (db2?.[a]) {
-        db2[a][b] = v;
-    }
+    console.log(db2);
+
+    Object.keys(membs)
+        .filter((i) => i != a)
+        .map((i) => {
+            addExp(i, a, membs[i]);
+        });
+
+    console.log(db2);
 
     await axios
         .patch(`http://localhost:${DB_PORT}/grps/1`, { ...val, body: db2 })
@@ -226,3 +285,4 @@ var server = app.listen(3002, function () {
     var port = server.address().port;
     console.log(`Example app listening at port ${port}`);
 });
+

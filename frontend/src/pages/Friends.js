@@ -21,7 +21,7 @@ export default function Friends() {
             })
             .then(async (r) => {
                 setGrp(r.data);
-                await delay(400);
+                // await delay(400);
                 setLoader(false);
             });
     }, []);
