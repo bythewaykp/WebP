@@ -1,0 +1,43 @@
+.heading{
+    font-size:38px;
+    margin:25px;
+}
+
+.groupsContainer {
+    margin: 20px;
+    padding: 40px;
+    background-color: #2BB673;
+    border-radius: 55px;
+    width: 700px;
+    height: 400px;
+}
+
+.label{
+    margin:20px;
+    margin-top:10px;
+    font-size:20px;
+    display:table-row;
+    font-weight: 500;
+}
+
+.input{
+    display:table-cell;
+    width:250px;
+    border-radius:10px;
+    border-width:0;
+    margin-top:10px;
+}
+
+.button-border-login {
+    display: flex;
+    justify-content: space-between;
+    background-color: #282828;
+    color: #FFFFFF;
+
+    border-radius: 26px;
+    width: 100px;
+    padding: 5px 22px;
+    margin-right:30px;
+    margin-left:10px;
+    margin-top:14px;
+}

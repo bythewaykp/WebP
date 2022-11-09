@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logout from "../components/Logout";
 import NavBar from "../components/Navbar";
 import Logo from "../components/Logo";
@@ -32,7 +32,7 @@ export default function Home() {
             <Logo />
 
             <div class="fc">
-                <form class="searchBarBorder fc">
+                <form class="searchBarBorder">
                     <input
                         onChange={(e) => {
                             setSearch(e.target.value);
@@ -81,12 +81,13 @@ export default function Home() {
                     )}
                 </div>
 
-                <div class="align-items-center">
+                {/* <div class="align-items-center">
                     <i class="plus-icon fa-solid fa-circle-plus"></i>
                     <p>Create a new group</p>
-                </div>
+                </div> */}
             </div>
-            <Logout />
+            <Link className="createGrp fc" to='/creategroup' state={{id:20}}>Create new group</Link>
+            <Logout /> 
         </div>
     );
 }

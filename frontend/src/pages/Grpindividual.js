@@ -41,47 +41,55 @@ export default function Grpindividual() {
                 <div class="searchBarBorder">
                     <p>{location.state.grpname}</p>
                 </div>
-                <button
-                    onClick={() => {
-                        setSimp(!simp);
-                        if (simp) {
-                            setLoader(true);
-                            axios
-                                .get(
-                                    "http://localhost:3002/grpindividualnosimp",
-                                    {
-                                        params: {
-                                            name: location.state.owner,
-                                            grp: location.state.grpname,
-                                        },
-                                    }
-                                )
-                                .then(async (r) => {
-                                    setObj(r.data.db);
-                                    console.log(r.data.s);
-                                    await delay(300);
-                                    setLoader(false);
-                                });
-                        } else {
-                            setLoader(true);
-                            axios
-                                .get("http://localhost:3002/grpindividual", {
-                                    params: {
-                                        name: location.state.owner,
-                                        grp: location.state.grpname,
-                                    },
-                                })
-                                .then(async (r) => {
-                                    setObj(r.data.db);
-                                    console.log(r.data.s);
-                                    await delay(300);
-                                    setLoader(false);
-                                });
-                        }
-                    }}
-                >
-                    simplify {simp ? "yes" : "no"}
-                </button>
+                <div className="fr simplify">
+                    simplify debts
+                    <input
+                        
+                        type="checkbox"
+                        checked={simp}
+                        onChange={() => 
+                            {
+                            setSimp(!simp);
+                            if (simp) {
+                                setLoader(true);
+                                axios
+                                    .get(
+                                        "http://localhost:3002/grpindividualnosimp",
+                                        {
+                                            params: {
+                                                name: location.state.owner,
+                                                grp: location.state.grpname,
+                                            },
+                                        }
+                                    )
+                                    .then(async (r) => {
+                                        setObj(r.data.db);
+                                        console.log(r.data.s);
+                                        await delay(300);
+                                        setLoader(false);
+                                    });
+                            } else {
+                                setLoader(true);
+                                axios
+                                    .get(
+                                        "http://localhost:3002/grpindividual",
+                                        {
+                                            params: {
+                                                name: location.state.owner,
+                                                grp: location.state.grpname,
+                                            },
+                                        }
+                                    )
+                                    .then(async (r) => {
+                                        setObj(r.data.db);
+                                        console.log(r.data.s);
+                                        await delay(300);
+                                        setLoader(false);
+                                    });
+                            }
+                        }}
+                    />
+                </div>
 
                 {totsum(obj) >= 0 ? (
                     <div class="group-border">{`You owe ${totsum(obj)}`}</div>
@@ -115,16 +123,18 @@ export default function Grpindividual() {
                 </div>
             </div>
             <div className="back">
-                <Link to="/">
+                <button class="none" onClick={()=>{
+                    navigate(-1)
+                }}>
                     <img
                         src="https://res.cloudinary.com/bhavana2002/image/upload/v1665062966/BACKICON_1_bprtda.png"
                         width="50px"
                     />
-                </Link>
+                </button>
                 <p>Go Back</p>
             </div>
             <div class="fr options">
-                <div className="fc">
+                {/* <div className="fc">
                     <Link to="/addexpense" state="hi">
                         <img
                             src="https://res.cloudinary.com/bhavana2002/image/upload/v1665062967/TICKICON_1_chfwrw.png"
@@ -132,9 +142,16 @@ export default function Grpindividual() {
                         />
                     </Link>
                     <p>Settle it Up</p>
-                </div>
+                </div> */}
                 <div className="fc">
-                    <Link to="/editgroup">
+                    <Link
+                        to="/editgrp"
+                        state={{
+                            owner: location.state.owner,
+                            grpname: location.state.grpname,
+                            membs: obj
+                        }}
+                    >
                         <img
                             src="https://res.cloudinary.com/bhavana2002/image/upload/v1665062957/EDITICON_v5mwie.png"
                             class="option-icons"

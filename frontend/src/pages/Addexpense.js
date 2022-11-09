@@ -86,16 +86,14 @@ export default function Addexpense() {
                                                     let c = {};
                                                     setAmong([]);
                                                     memberlist.map((i) => {
-                                                        c[i] =
-                                                            e.target.value /
-                                                            memberlist.length;
+                                                        c[i] =0 
                                                     });
                                                     setAmongvals(c);
                                                 } else {
                                                     setAmong(memberlist);
                                                     let c = {};
                                                     among.map((i) => {
-                                                        c[i] = (
+                                                        c[i] = Number(
                                                             e.target.value /
                                                             among.length
                                                         ).toFixed(2);
@@ -103,7 +101,6 @@ export default function Addexpense() {
                                                     setAmongvals(c);
                                                 }
                                             }}
-                                            type="number"
                                             value={amount}
                                             class="fc"
                                             id="amount"
@@ -160,7 +157,7 @@ export default function Addexpense() {
                                                                                 e
                                                                                     .target
                                                                                     .value
-                                                                            ),
+                                                                            ).toFixed(2),
                                                                         }
                                                                     );
                                                                     if (
@@ -278,9 +275,9 @@ export default function Addexpense() {
                                                                             }
                                                                         );
                                                                         b[i] =
-                                                                            amount /
+                                                                            (amount /
                                                                             (among.length +
-                                                                                1);
+                                                                                1)).toFixed(2);
                                                                         setAmongvals(
                                                                             b
                                                                         );
@@ -329,7 +326,9 @@ export default function Addexpense() {
                 </div>
             </div>
             <div className="back">
-                <button onClick={() => navigate(-1)} className="backbtn">
+                <button class="none" onClick={()=>{
+                    navigate(-1)
+                }}>
                     <img
                         src="https://res.cloudinary.com/bhavana2002/image/upload/v1665062966/BACKICON_1_bprtda.png"
                         width="50px"

@@ -40,7 +40,16 @@ input[type=number] {
 a {
     text-decoration: none;
 }
-
+.navitem{
+    text-decoration: none;
+    color: #282828;
+}
+.navitem:hover{
+    color:#2BB673
+}
+.active{
+    color:#00aeff
+}
 .logo {
     position: absolute;
     left: 40px;
@@ -256,4 +265,29 @@ a {
 
   .gap{
     gap: 10px;
+  }
+
+  .createGrp{
+    background-color: #282828;
+    color:#ffffff;
+    border-radius: 30px;
+    padding: 10px 25px;
+  }
+
+  .createGrp:hover{
+    background-color:#555;
+    color:#ffffff;
+    border-radius: 30px;
+    padding: 10px 25px;
+  }
+
+  .simplify{
+    gap: 10px;
+    position: absolute;
+    right: 170px;
+    top:53%;
+  }
+
+  .none{
+    all: unset;
   }

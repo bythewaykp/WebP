@@ -62,15 +62,13 @@ app.get("/grpindividualnosimp", async (req, res) => {
     let s = b["body"];
 
     // let t = Object.assign({}, s)
-    let t ={...s}
+    let t = { ...s };
 
-    Object.keys(s).map(i=>{
-        Object.keys(s[i]).map(j=>{
-
-            t[j][i]=-s[i][j]
-        })
-        
-    })
+    Object.keys(s).map((i) => {
+        Object.keys(s[i]).map((j) => {
+            t[j][i] = -s[i][j];
+        });
+    });
     console.log(s);
 
     // console.log(s);
@@ -214,25 +212,32 @@ app.post("/addexpense", async (req, res) => {
 
     let val = await grpbody(grp);
     let db2 = val["body"];
-
-    console.log(db2);
+    // console.log(db2);
+    let [id] = await axios
+        .get(`http://localhost:${DB_PORT}/grps?name=${grp}`)
+        .then((r) => {
+            return r.data.filter((i) => i != grp).map((i) => i["id"]);
+        })
+        .catch((e) => {
+            console.log("e - get grp id");
+        });
 
     Object.keys(membs)
         .filter((i) => i != a)
         .map((i) => {
-            addExp(i, a, membs[i]);
+            addExp(i, a, Number(membs[i]));
         });
 
     console.log(db2);
 
-    await axios
-        .patch(`http://localhost:${DB_PORT}/grps/1`, { ...val, body: db2 })
-        .then((r) => {
-            res.json(r.data);
-        })
-        .catch((e) => {
-            console.log("e - add expense");
-        });
+    // await axios
+    //     .patch(`http://localhost:${DB_PORT}/grps/${id}`, { ...val, body: db2 })
+    //     .then((r) => {
+    //         res.json(r.data);
+    //     })
+    //     .catch((e) => {
+    //         console.log("e - add expense");
+    //     });
 });
 
 app.post("/newmember", async (req, res) => {
@@ -281,8 +286,55 @@ app.post("/deletemember", async (req, res) => {
         });
 });
 
+//edit group
+app.post("/editgrp", async (req, res) => {
+    console.log("triggered /editgrp post");
+    let { grp, membs, name , newgrp } = req.body;
+
+    let val = await grpbody(grp)
+    let b = val["body"]
+    let db2 = { ...b };
+    let s = simplify(db2);
+
+    let [id] = await axios
+        .get(`http://localhost:${DB_PORT}/grps?name=${grp}`)
+        .then((r) => {
+            return r.data.filter((i) => i != grp).map((i) => i["id"]);
+        })
+        .catch((e) => {
+            console.log("e - get grp id");
+        });
+
+    Object.keys(membs)
+        .filter((i) => !Object.keys(db2).includes(i))
+        .map((j) => {
+            db2[j] = {};
+        });
+    Object.keys(db2)
+        .filter(
+            (i) =>
+                !Object.keys(membs).concat(Object.keys(s)).includes(i) &&
+                i != name
+        )
+        .map((j) => {
+            delete db2[j];
+        });
+
+
+    await axios
+        .patch(`http://localhost:${DB_PORT}/grps/${id}`, {
+            ...val,
+            name:newgrp,
+            body: db2,
+        })
+        .then((r) => {
+            res.json(r.data);
+        })
+        .catch((e) => {
+            console.log("e - add membs");
+        });
+});
 var server = app.listen(3002, function () {
     var port = server.address().port;
     console.log(`Example app listening at port ${port}`);
 });
-

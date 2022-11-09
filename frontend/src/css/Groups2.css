@@ -1,0 +1,174 @@
+::-webkit-scrollbar {
+    width: 20px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* padding: 20px; */
+    border-radius: 50px;
+    margin: 90px;
+}
+
+/* Handle */
+/* ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 20px;
+    
+  } */
+::-webkit-scrollbar-thumb {
+    border: 7px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+    border-radius: 50px;
+    background-color: #aaaaaa;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+
+.searchBarBorder {
+    border-radius: 40px;
+    /* border: 0; */
+    /* margin: 15px; */
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-right:15px;
+    text-align: center;
+    width: 300px;
+    height: 40px;
+    background-color: #D9D9D9;
+}
+
+.grpName {
+    font-size: 18px;
+}
+.grpOwe {
+    font-size: 10px;
+    padding-top: 5px;
+}
+
+.searchBar {
+    margin-top: 5px;
+    border: 0;
+    outline: 0;
+    background-color: #D9D9D9;
+    text-align: center;
+}
+
+.searchIcon {
+    text-align: right;
+}
+
+.groupsContainer {
+    margin: 20px;
+    padding: 40px;
+    background-color: #2BB673;
+    border-radius: 55px;
+    width: 700px;
+    height: 400px;
+}
+
+.Gcontainer {
+    overflow-y: auto;
+    height: 300px;
+    gap: 30px;
+    padding: 10px;
+    border-width:0;
+}
+
+.group-border2 {
+    display: flex;
+    justify-content: space-between;
+    background-color: #282828;
+    color: #FFFFFF;
+
+    border-radius: 26px;
+    width: 480px;
+    padding: 10px 45px;
+}
+
+.button-border{
+    background-color: #282828;
+    color: #FFFFFF;
+    
+    border-radius: 27px;
+    width: 300px;
+    padding: 10px 45px;
+}
+
+.plus-icon {
+    height: 70px;
+    width: 70px;
+    font-size: 70px;
+    border: 0;
+    outline: 0;
+    margin-bottom: 10px;
+    text-align: center;
+    padding-left: 30px;
+}
+
+.acc-div {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+#acc-img {
+    width: 60px;
+    height: 60px;
+    border: solid;
+    border-color: #2BB673;
+    border-width: 3px;
+    border-radius: 50px;
+}
+
+.option-icons{
+    width: 40px;
+    
+}
+.back{
+    /* width: 60px; */
+
+    position: absolute;
+    right: 40px;
+    top:50%;
+}
+.options{
+    gap: 20px;
+}
+
+.addMember-icon{
+    height:25px;
+    width:25px;
+    border-width:0px;
+}
+
+.addMember-button{
+    border:none;
+    background-color: #D9D9D9;
+}
+
+.group-border-list {
+    display: flex;
+    justify-content: center;
+    background-color: #282828;
+    color: #FFFFFF;
+
+    border-radius: 35px;
+    width: fit-content;
+    padding: 3px 25px 3px 10px;
+    margin:5px;
+}
+#remove{
+    all: unset;
+    font-size: 1em;
+    width: fit-content;
+    height: fit-content;
+    cursor: pointer;
+}
+.gap{
+    gap: 10px;
+    align-items: center;
+}

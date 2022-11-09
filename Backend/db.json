@@ -41,12 +41,13 @@
     },
     {
       "id": 3,
-      "name": "mysore2",
+      "name": "tvm",
       "body": {
         "kp": {
-          "nichu": 45
+          "nichu": 12
         },
-        "nichu": {}
+        "nichu": {},
+        "bhavana": {}
       }
     },
     {
@@ -54,13 +55,12 @@
       "name": "idukki",
       "body": {
         "kp": {
-          "nayana": 158
+          "nayana": 15
         },
         "nayana": {
           "anagha": 20
         },
-        "anagha": {},
-        "anu": {}
+        "anagha": {}
       }
     },
     {
