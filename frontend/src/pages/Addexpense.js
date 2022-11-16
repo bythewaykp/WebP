@@ -20,7 +20,7 @@ export default function Addexpense() {
 
     useEffect(() => {
         // console.log(props);
-        // setLoader(true);
+        setLoader(true);
         axios
             .get("http://localhost:3002/grpmembs", {
                 params: {
@@ -39,6 +39,7 @@ export default function Addexpense() {
                     c[i] = 0;
                 });
                 setAmongvals(c);
+                setLoader(false)
             });
     }, []);
     console.log(amongvals);
@@ -314,7 +315,7 @@ export default function Addexpense() {
                                             </div>
                                         </div>
                                     </div>
-                                    <button className="fc" action="submit">Done</button>
+                                    <button onClick={i=>{navigate(-1)}} className="fc" action="submit">Done</button>
                                 </form>
                             </div>
                         ) : (

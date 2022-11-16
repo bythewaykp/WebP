@@ -28,6 +28,7 @@ export default function Grpindividual() {
             })
             .then(async (r) => {
                 setObj(r.data.db);
+                console.log(r.data.db);
                 console.log(r.data.s);
                 await delay(300);
                 setLoader(false);
@@ -64,7 +65,7 @@ export default function Grpindividual() {
                                     )
                                     .then(async (r) => {
                                         setObj(r.data.db);
-                                        console.log(r.data.s);
+                                        console.log(r.data.t);
                                         await delay(300);
                                         setLoader(false);
                                     });

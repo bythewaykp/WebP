@@ -20,6 +20,7 @@ export default function Home() {
             .get("http://localhost:3002/grplist", { params: { name: "kp" } })
             .then(async (r) => {
                 setGrp(r.data);
+                console.log(r.data);
                 // await delay(300);
                 setLoader(false);
             });

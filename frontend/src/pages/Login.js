@@ -1,5 +1,4 @@
 import "../css/Register.css";
-import NavBar from "../components/Navbar";
 import Logo from "../components/Logo";
 import Loader from "../components/Loader";
 import { useEffect, useState } from "react";
@@ -11,8 +10,6 @@ import {useNavigate} from 'react-router-dom';
 export default function Home() {
     let [grp, setGrp] = useState({});
     let [loader, setLoader] = useState(false);
-    let [search, setSearch] = useState("");
-    let [items,setItems] = useState([]);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -49,10 +46,13 @@ export default function Home() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (name === '' || email === '' || password === '') { 
-      setError(true);
+
+        setError(true);
       
-    } else {
-      navigate('/');
+    // } else {
+    //   navigate(to="/",{state={
+    //     name,email,password
+    // }});
     //   setSubmitted(true);
     //   setError(false);
     }
@@ -84,7 +84,6 @@ export default function Home() {
     );
   };
 
-    console.log(grp);
 
     return (
         <div>

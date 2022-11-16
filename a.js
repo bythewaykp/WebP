@@ -5,7 +5,7 @@ let visualize = () => {
 };
 
 const simplify = require("./Backend/simplify");
-let db = require("./db2");
+let db = require("./backend/db2");
 const fs = require("fs");
 
 let printNwrite = (file) => {

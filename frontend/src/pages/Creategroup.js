@@ -48,6 +48,7 @@ export default function Friends() {
     }
     return (
         <div>
+
             <NavBar />
             <Logo />
             <div class="d-flex flex-column align-items-center">
@@ -175,14 +176,23 @@ export default function Friends() {
             </div>
             <button
                 className="createGrp fc"
-                onClick={axios
-                    .post("http://localhost/3002/creategroup", {
+                onClick={()=>{
+                    console.log({
                         grp: grpname,
                         membs: items,
+                        owner:"kp"
+                    });
+                    axios
+                    .post("http://localhost/3002/creategrp", {
+                        grp: grpname,
+                        membs: items,
+                        owner:"kp"
                     })
                     .then((r) => {
                         console.log(r.data);
-                    })}
+                    })
+                }
+            }
             >
                 Done
             </button>
