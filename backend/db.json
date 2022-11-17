@@ -1,0 +1,85 @@
+{
+  "grps": [
+    {
+      "id": 1,
+      "name": "wayanad2",
+      "body": {
+        "kp": {},
+        "nichu": {
+          "alex": 10,
+          "yuvetha": 55,
+          "kp": 72.25,
+          "bhavana": 116.25
+        },
+        "alex": {
+          "keerthi": 35,
+          "kp": 71.5,
+          "bhavana": 116.25
+        },
+        "keerthi": {
+          "yuvetha": 20,
+          "kp": 92.25,
+          "bhavana": 116.25
+        },
+        "yuvetha": {
+          "kp": 52.5
+        },
+        "bhavana": {
+          "kp": 92.25
+        }
+      }
+    },
+    {
+      "id": 2,
+      "name": "mysore",
+      "body": {
+        "kp": {
+          "nichu": 10
+        },
+        "nichu": {}
+      }
+    },
+    {
+      "id": 3,
+      "name": "tvm",
+      "body": {
+        "kp": {
+          "nichu": 12
+        },
+        "nichu": {},
+        "bhavana": {}
+      }
+    },
+    {
+      "id": 4,
+      "name": "idukki",
+      "body": {
+        "kp": {},
+        "nayana": {
+          "anagha": 20
+        },
+        "anagha": {
+          "kp": 15
+        }
+      }
+    },
+    {
+      "id": 5,
+      "name": "kozhikode",
+      "body": {
+        "kp": {
+          "nichu": 23.5
+        },
+        "nichu": {
+          "alex": 20
+        },
+        "alex": {
+          "kp": 7.5
+        },
+        "yuvetha": {
+          "kp": 7.5
+        }
+      }
+    }
+  ]
+}

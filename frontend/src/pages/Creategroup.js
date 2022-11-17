@@ -176,21 +176,17 @@ export default function Friends() {
             </div>
             <button
                 className="createGrp fc"
-                onClick={()=>{
-                    console.log({
-                        grp: grpname,
-                        membs: items,
-                        owner:"kp"
-                    });
-                    axios
-                    .post("http://localhost/3002/creategrp", {
-                        grp: grpname,
-                        membs: items,
-                        owner:"kp"
+                onClick={async ()=>{
+
+                    await axios
+                    .post("http://localhost/3002/new", {
+                        grp: "grpname",
+                        membs: "items",
+                        // owner:"kp"
                     })
-                    .then((r) => {
-                        console.log(r.data);
-                    })
+                    // .then((r) => {
+                    //     console.log(r.data);
+                    // })
                 }
             }
             >
